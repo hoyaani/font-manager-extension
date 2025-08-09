@@ -1,0 +1,377 @@
+/* Content styles for Font Manager Extension */
+
+/* 確保字體管理器的通知不受頁面樣式影響 */
+#font-manager-notification {
+    all: initial !important;
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    background: rgba(66, 133, 244, 0.95) !important;
+    color: white !important;
+    padding: 12px 20px !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    z-index: 999999 !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    transition: all 0.3s ease !important;
+    pointer-events: none !important;
+    user-select: none !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    min-width: 120px !important;
+    max-width: 300px !important;
+    word-wrap: break-word !important;
+}
+
+/* 確保輸入欄位在字體調整後仍保持可用性 */
+input:not([type="color"]):not([type="range"]):not([type="checkbox"]):not([type="radio"]),
+textarea,
+select {
+    background-color: white !important;
+    color: #333 !important;
+    border: 1px solid #ddd !important;
+    padding: 4px 8px !important;
+    border-radius: 4px !important;
+}
+
+input:focus:not([type="color"]):not([type="range"]):not([type="checkbox"]):not([type="radio"]),
+textarea:focus,
+select:focus {
+    outline: 2px solid #4285f4 !important;
+    outline-offset: 1px !important;
+    border-color: #4285f4 !important;
+    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2) !important;
+}
+
+/* 確保按鈕保持可見性 */
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+    background-color: #f8f9fa !important;
+    color: #333 !important;
+    border: 1px solid #ddd !important;
+    padding: 6px 12px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+}
+
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+    background-color: #e9ecef !important;
+    border-color: #adb5bd !important;
+}
+
+/* 確保表單標籤的可讀性 */
+label {
+    display: inline-block !important;
+    margin-bottom: 4px !important;
+    font-weight: 600 !important;
+}
+
+/* 確保佔位符文字可見 */
+::placeholder {
+    color: #6c757d !important;
+    opacity: 0.8 !important;
+}
+
+/* 確保選擇文字的對比度 */
+::selection {
+    background-color: #4285f4 !important;
+    color: white !important;
+}
+
+::-moz-selection {
+    background-color: #4285f4 !important;
+    color: white !important;
+}
+
+/* 確保程式碼區塊的可讀性 */
+code,
+pre,
+.highlight,
+[class*="code"],
+[class*="syntax"] {
+    background-color: #f8f9fa !important;
+    color: #212529 !important;
+    border: 1px solid #e9ecef !important;
+    border-radius: 4px !important;
+    font-family: 'Courier New', 'Monaco', 'Menlo', monospace !important;
+}
+
+/* 確保導航連結的可見性 */
+nav a,
+.nav a,
+.navbar a,
+.menu a,
+[class*="nav"] a {
+    text-decoration: underline !important;
+    color: #007bff !important;
+}
+
+nav a:hover,
+.nav a:hover,
+.navbar a:hover,
+.menu a:hover,
+[class*="nav"] a:hover {
+    color: #0056b3 !important;
+    text-decoration: underline !important;
+}
+
+/* 確保表格的可讀性 */
+table {
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+}
+
+th,
+td {
+    border: 1px solid #dee2e6 !important;
+    padding: 8px !important;
+    text-align: left !important;
+}
+
+th {
+    background-color: #f8f9fa !important;
+    font-weight: bold !important;
+}
+
+/* 確保引用區塊的可讀性 */
+/* 確保引用區塊的可讀性 */
+blockquote {
+    border-left: 4px solid #6c757d !important;
+    padding-left: 16px !important;
+    margin: 16px 0 !important;
+    font-style: italic !important;
+    background-color: #f8f9fa !important;
+    padding: 12px 16px !important;
+    border-radius: 0 4px 4px 0 !important;
+}
+
+/* 確保列表的可讀性 */
+ul, ol {
+    padding-left: 20px !important;
+    margin: 8px 0 !important;
+}
+
+li {
+    margin-bottom: 4px !important;
+    line-height: 1.4 !important;
+}
+
+/* 確保標題的層次結構 */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold !important;
+    margin: 16px 0 8px 0 !important;
+    line-height: 1.2 !important;
+}
+
+h1 { font-size: 2em !important; }
+h2 { font-size: 1.5em !important; }
+h3 { font-size: 1.25em !important; }
+h4 { font-size: 1.1em !important; }
+h5 { font-size: 1em !important; }
+h6 { font-size: 0.9em !important; }
+
+/* 確保段落間距 */
+p {
+    margin: 8px 0 !important;
+    line-height: 1.5 !important;
+}
+
+/* 確保圖片適應性 */
+img {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 4px !important;
+}
+
+/* 確保水平分隔線可見 */
+hr {
+    border: none !important;
+    border-top: 1px solid #dee2e6 !important;
+    margin: 16px 0 !important;
+}
+
+/* 確保搜尋框的可見性 */
+input[type="search"] {
+    background-color: white !important;
+    color: #333 !important;
+    border: 2px solid #ddd !important;
+    border-radius: 20px !important;
+    padding: 8px 16px !important;
+}
+
+input[type="search"]:focus {
+    border-color: #4285f4 !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2) !important;
+}
+
+/* 確保選單和下拉式選單的可見性 */
+.dropdown,
+.menu,
+.submenu {
+    background-color: white !important;
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+}
+
+/* 確保工具提示的可讀性 */
+[title]:hover::after,
+.tooltip {
+    background-color: #333 !important;
+    color: white !important;
+    border-radius: 4px !important;
+    padding: 4px 8px !important;
+    font-size: 12px !important;
+    z-index: 999999 !important;
+}
+
+/* 確保模態對話框的可見性 */
+.modal,
+.dialog,
+.popup {
+    background-color: white !important;
+    color: #333 !important;
+    border: 1px solid #ddd !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
+}
+
+/* 確保載入指示器的可見性 */
+.loading,
+.spinner,
+[class*="load"] {
+    color: #4285f4 !important;
+}
+
+/* 確保警告和錯誤訊息的可見性 */
+.error,
+.warning,
+.alert {
+    padding: 12px !important;
+    border-radius: 4px !important;
+    margin: 8px 0 !important;
+}
+
+.error {
+    background-color: #f8d7da !important;
+    color: #721c24 !important;
+    border: 1px solid #f5c6cb !important;
+}
+
+.warning {
+    background-color: #fff3cd !important;
+    color: #856404 !important;
+    border: 1px solid #ffeaa7 !important;
+}
+
+.alert {
+    background-color: #d1ecf1 !important;
+    color: #0c5460 !important;
+    border: 1px solid #bee5eb !important;
+}
+
+/* 確保成功訊息的可見性 */
+.success {
+    background-color: #d4edda !important;
+    color: #155724 !important;
+    border: 1px solid #c3e6cb !important;
+    padding: 12px !important;
+    border-radius: 4px !important;
+    margin: 8px 0 !important;
+}
+
+/* 確保高亮文字的可見性 */
+mark,
+.highlight {
+    background-color: #fff3cd !important;
+    color: #856404 !important;
+    padding: 2px 4px !important;
+    border-radius: 2px !important;
+}
+
+/* 確保卡片和面板的可見性 */
+.card,
+.panel,
+.box {
+    background-color: white !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 8px !important;
+    padding: 16px !important;
+    margin: 8px 0 !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+/* 確保徽章和標籤的可見性 */
+.badge,
+.tag,
+.label {
+    display: inline-block !important;
+    padding: 4px 8px !important;
+    background-color: #6c757d !important;
+    color: white !important;
+    border-radius: 12px !important;
+    font-size: 0.8em !important;
+    font-weight: 600 !important;
+}
+
+/* 確保進度條的可見性 */
+.progress {
+    background-color: #e9ecef !important;
+    border-radius: 4px !important;
+    height: 20px !important;
+    overflow: hidden !important;
+}
+
+.progress-bar {
+    background-color: #4285f4 !important;
+    height: 100% !important;
+    transition: width 0.3s ease !important;
+}
+
+/* 響應式設計調整 */
+@media (max-width: 768px) {
+    #font-manager-notification {
+        top: 10px !important;
+        right: 10px !important;
+        left: 10px !important;
+        max-width: none !important;
+    }
+}
+
+/* 確保在暗色主題下的可讀性 */
+@media (prefers-color-scheme: dark) {
+    input:not([type="color"]):not([type="range"]):not([type="checkbox"]):not([type="radio"]),
+    textarea,
+    select {
+        background-color: #2d3748 !important;
+        color: #e2e8f0 !important;
+        border-color: #4a5568 !important;
+    }
+    
+    button,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"] {
+        background-color: #4a5568 !important;
+        color: #e2e8f0 !important;
+        border-color: #718096 !important;
+    }
+    
+    .card,
+    .panel,
+    .box {
+        background-color: #2d3748 !important;
+        border-color: #4a5568 !important;
+        color: #e2e8f0 !important;
+    }
+}

@@ -1,0 +1,77 @@
+{
+  "manifest_version": 2,
+  "name": "網頁字體管理器",
+  "version": "0.1.0.0",
+  "description": "專業的網頁字體管理工具，支援字體大小調整、顏色設定、字體選擇等功能",
+  
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "<all_urls>"
+  ],
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "網頁字體管理器",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    }
+  },
+
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_end"
+    }
+  ],
+
+  "commands": {
+    "increase-font": {
+      "suggested_key": {
+        "default": "Ctrl+Equal"
+      },
+      "description": "增大字體"
+    },
+    "decrease-font": {
+      "suggested_key": {
+        "default": "Ctrl+Minus"
+      },
+      "description": "縮小字體"
+    },
+    "reset-font": {
+      "suggested_key": {
+        "default": "Ctrl+0"
+      },
+      "description": "重置字體"
+    }
+  },
+
+  "web_accessible_resources": [
+    "icons/*.png",
+    "styles/*.css"
+  ],
+
+  "author": "hoyaani",
+  "homepage_url": "https://github.com/hoyaani/font-manager-extension"
+}

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>網頁 Fonts 管理器</title>
+  <style>
+    /* 重置基礎樣式，簡化示例 */
+    * {
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box;
+      font-family: "Microsoft YaHei", sans-serif;
+    }
+    body {
+      width: 600px; /* 彈出頁整體寬度，可按需調整 */
+      padding: 16px;
+      background-color: #fff;
+      border: 1px solid #ddd; /* 增加邊框 */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 增加陰影效果 */
+      border-radius: 8px; /* 增加圓角 */
+    }
+    /* 主容器：橫向兩欄 */
+    .container {
+      display: flex;
+      gap: 20px; /* 兩欄之間的間距 */
+    }
+    .divider {
+      width: 1px;
+      background-color: #ccc;
+      margin: 0 10px;
+    }
+    /* 左欄、右欄基礎樣式 */
+    .left-col, .right-col {
+      flex: 1; /* 讓兩欄平分剩餘空間，也可手動設寬度（如 width: 50% ） */
+    }
+    .left-col {
+      flex: 1;
+      border-right: 1px solid #ccc; /* 垂直分割線 */
+      padding-right: 10px; /* 避免文字貼邊 */
+    }
+    .right-col {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .section-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 8px;
+        border-left: 4px solid #4285f4;
+        padding-left: 6px;
+        padding: 8px 12px;
+        background-color: #eef4ff;
+        border-radius: 8px;
+    }
+    /* 模塊標題統一風格 */
+    h3 {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 8px;
+      border-left: 4px solid #4285f4;
+      padding-left: 6px;
+    }
+    /* 按鈕組（A+/A- 等） */
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    /* 左欄頂部群組按鈕設定 */
+    .btn-group button {
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      background: #f8f9fa;
+      cursor: pointer;
+      border-radius: 8px;
+      font-size: 18px;
+    }
+    .btn-group button:hover {
+      background: #f0f0f0;
+    }
+    /* 專門針對這個獨立按鈕的樣式 */
+    .btn-group > button#colorReset {
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      background: #f8f9fa;
+      cursor: pointer;
+      border-radius: 8px;
+      font-size: 18px;
+      /* width: 100%; 如果需要填滿容器寬度 */
+    }
+    
+    .btn-group > button#colorReset:hover {
+      background: #f0f0f0;
+    }
+    /* 顏色選擇區塊 */
+    .color-setting {
+      margin-bottom: 12px;
+    }
+    .color-setting label {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 14px;
+      color: #555;
+    }
+    .color-input {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .color-input input[type="text"] {
+      flex: 1;
+      padding: 4px 6px;
+      font-size: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    .color-picker {
+      width: 24px;
+      height: 24px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      background-image: url('icons/palette-icon.ico');
+      background-size: 80%;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    /* 複選框區塊 */
+    .checkbox-group {
+      margin-bottom: 16px;
+    }
+    .checkbox-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: #555;
+    }
+    /* 字體下拉選擇器 */
+    .font-select {
+      margin-bottom: 16px;
+    }
+    .font-select label {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 14px;
+      color: #555;
+    }
+    .font-select select {
+      width: 100%;
+      padding: 6px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    /* 右欄「進階設定」按鈕組 */
+    .advanced-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .advanced-btns button {
+      text-align: left;
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      background: #f8f9fa;
+      cursor: pointer;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .advanced-btns button:hover {
+      background: #f0f0f0;
+    }
+    /* 底部「套用設定」按鈕 */
+    .apply-btn {
+      width: 100%;
+      padding: 5px;
+      font-size: 20px;
+      color: #fff;
+      background: #4285f4;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .apply-btn:hover {
+      background: #3367d6;
+    }
+  </style>
+</head>
+<body>
+  <!-- 主容器：橫向切分左、右欄 -->
+  <div class="container">
+    <!-- 左欄：放「字體調節、顏色選擇、複選框、字體下拉」 -->
+    <div class="left-col">
+      <!-- 1. 字體大小調節按鈕（A+/A-/回復預設） -->
+      <div class="btn-group">
+        <button id="fontIncrease">A+</button>
+        <button id="fontDecrease">A-</button>
+        <button id="fontReset">回復預設</button>
+      </div>
+      <p style="font-size: 14px; color: #666; margin-bottom: 12px;">
+        用戶可用快捷鍵快速調整網頁字體尺寸。
+      </p>
+
+      <!-- 2. 字體顏色設定 -->
+      <div class="color-setting">
+        <label>字體顏色</label>
+        <div class="color-input">
+          <input type="text" id="fontColor" value="#000000" />
+          <div 
+            class="color-picker" 
+            id="fontColorPicker" 
+            title="點擊選色或滴管取色">
+          </div>
+        </div>
+        <small style="color: #999; font-size: 12px; display: block; margin-top: 2px;">
+          預設字體顏色
+        </small>
+      </div>
+
+      <!-- 3. 背景顏色設定 -->
+      <div class="color-setting">
+        <label>背景顏色</label>
+        <div class="color-input">
+          <input type="text" id="bgColor" value="#ffffff" />
+          <div 
+            class="color-picker" 
+            id="bgColorPicker" 
+            title="點擊選色或滴管取色">
+          </div>
+        </div>
+        <small style="color: #999; font-size: 12px; display: block; margin-top: 2px;">
+          預設背景顏色
+        </small>
+      </div>
+
+      <div class="btn-group" style="margin-bottom:12px;">
+        <button id="colorReset">回復預設</button>
+      </div>
+
+      <!-- 5. 複選框（超連結樣式） -->
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" id="linkUnderline" checked /> 
+          在超連接下劃線
+        </label>
+        <label>
+          <input type="checkbox" id="linkColor" checked /> 
+          彩色超連接
+        </label>
+      </div>
+
+      <!-- 6. 字體下拉選擇 -->
+      <div class="font-select">
+        <label>字體：</label>
+        <select class="font-dropdown" id="fontFamily">
+        <option value="Default Font" style="font-family: Arial, sans-serif;">Default Font</option>
+        <option value="Arial" style="font-family: Arial, sans-serif;">Arial</option>
+        <option value="Helvetica" style="font-family: Helvetica, sans-serif;">Helvetica</option>
+        <option value="sans-serif" style="font-family: sans-serif;">sans-serif</option>
+        <option value="Tahoma" style="font-family: Tahoma, sans-serif;">Tahoma</option>
+        <option value="Trebuchet MS" style="font-family: 'Trebuchet MS', sans-serif;">Trebuchet MS</option>
+        <option value="Verdana" style="font-family: Verdana, sans-serif;">Verdana</option>
+        <option value="Lucida Sans Unicode" style="font-family: 'Lucida Sans Unicode', sans-serif;">Lucida Sans Unicode</option>
+        <option value="Impact" style="font-family: Impact, fantasy;">Impact</option>
+        <option value="Arial Black" style="font-family: 'Arial Black', sans-serif;">Arial Black</option>
+        <option value="Comic Sans MS" style="font-family: 'Comic Sans MS', cursive;">Comic Sans MS</option>
+        <option value="cursive" style="font-family: cursive;">cursive</option>
+        <option value="Courier" style="font-family: Courier, monospace;">Courier</option>
+        <option value="Courier New" style="font-family: 'Courier New', monospace;">Courier New</option>
+        <option value="monospace" style="font-family: monospace;">monospace</option>
+        <option value="Lucida Console" style="font-family: 'Lucida Console', monospace;">Lucida Console</option>
+        <option value="Book Antiqua" style="font-family: 'Book Antiqua', serif;">Book Antiqua</option>
+        <option value="Bookman Old Style" style="font-family: 'Bookman Old Style', serif;">Bookman Old Style</option>
+        <option value="Georgia" style="font-family: Georgia, serif;">Georgia</option>
+        <option value="Palatino Linotype" style="font-family: 'Palatino Linotype', serif;">Palatino Linotype</option>
+        <option value="serif" style="font-family: serif;">serif</option>
+        <option value="Times" style="font-family: Times, serif;">Times</option>
+        <option value="Times New Roman" style="font-family: 'Times New Roman', serif;">Times New Roman</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 右欄：放「進階設定（5 個按鈕） + 套用設定」 -->
+    <div class="right-col">
+      <h3 class="section-title">進階設定：</h3>
+      <!-- 5 個進階按鈕 -->
+      <div class="advanced-btns">
+        <button id="saveTextSize">儲存每個網站的文字大小</button>
+        <button id="saveTextColor">儲存每個網站的文字顏色</button>
+        <button id="saveFontType">儲存每個網站的字體類型</button>
+        <button id="saveBgColor">儲存每個網站的背景顏色</button>
+        <button id="saveConfig">儲存/讀取組態檔案</button>
+      </div>
+      <!-- 底部「套用設定」按鈕 -->
+      <button class="apply-btn" id="applySettings">套用設定</button>
+    </div>
+  </div>
+
+  <!-- 若需要實現「滴管取色」「按鈕功能」，需補充 JS 邏輯 -->
+  <script>
+    // 以下僅示範基礎按鈕點擊，實際需結合擴展 API（如儲存、消息通信等）
+    document.getElementById('fontIncrease').addEventListener('click', () => {
+      console.log('A+ 點擊，調整字體放大');
+      // 這裡可調用 content script 或直接操作 DOM（視擴展架構而定）
+    });
+
+    document.getElementById('fontDecrease').addEventListener('click', () => {
+      console.log('A- 點擊，調整字體縮小');
+    });
+
+    document.getElementById('fontReset').addEventListener('click', () => {
+      console.log('回復預設（字體大小）點擊');
+    });
+
+    document.getElementById('colorReset').addEventListener('click', () => {
+      console.log('回復預設（顏色）點擊');
+    });
+
+    // 滴管取色可結合 <input type="color"> 或第三方庫（如 tinycolor、chroma.js）
+    // 簡單示範：點擊「顏色方塊」喚起瀏覽器默認選色器
+    document.getElementById('fontColorPicker').addEventListener('click', () => {
+      const colorInput = document.createElement('input');
+      colorInput.type = 'color';
+      colorInput.value = document.getElementById('fontColor').value;
+      colorInput.addEventListener('change', (e) => {
+        document.getElementById('fontColor').value = e.target.value;
+      });
+      colorInput.click();
+    });
+
+    document.getElementById('bgColorPicker').addEventListener('click', () => {
+      const colorInput = document.createElement('input');
+      colorInput.type = 'color';
+      colorInput.value = document.getElementById('bgColor').value;
+      colorInput.addEventListener('change', (e) => {
+        document.getElementById('bgColor').value = e.target.value;
+      });
+      colorInput.click();
+    });
+
+    // 進階按鈕點擊示範
+    document.getElementById('saveTextSize').addEventListener('click', () => {
+      console.log('保存每個網站的文本大小 點擊');
+    });
+    // 其餘 4 個進階按鈕同理，根據需求補充
+
+    document.getElementById('applySettings').addEventListener('click', () => {
+      console.log('套用設定 點擊，需將當前表單值同步到網頁或儲存');
+    });
+  </script>
+</body>
+</html>

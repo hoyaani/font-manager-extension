@@ -1,0 +1,35 @@
+# 忽略操作系統相關文件
+.DS_Store
+Thumbs.db
+
+# 忽略臨時文件和緩存
+*.log
+*.tmp
+*.bak
+.cache/
+temp/
+
+# 忽略IDE相關文件
+.idea/
+.vscode/
+*.sublime-*
+*.swp
+*.swo
+
+# 忽略瀏覽器擴展打包文件
+*.zip
+*.xpi
+
+# 忽略node_modules（如果未來使用npm）
+node_modules/
+
+# 忽略用戶配置文件（如果有）
+user-settings.json
+*.local
+
+# 忽略測試產生的文件
+coverage/
+tests/output/
+
+# 不需要跟蹤的圖標文件（如果有原始圖稿）
+icons/source/
